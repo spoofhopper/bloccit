@@ -9,5 +9,5 @@ RSpec.describe Comment, type: :model do
       expect(comment).to have_attributes(body: "Comment Body")
     end
   end
-  
+
 end
