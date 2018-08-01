@@ -18,3 +18,13 @@ end
 puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+
+unique_post = Post.find_or_create_by!(
+  title: "This is the title of a unique test post",
+  body: "This is the body of a unique test post"
+)
+
+Comment.find_or_create_by!(
+  post: unique_post,
+  body: "This is the body of a unique comment"
+)
