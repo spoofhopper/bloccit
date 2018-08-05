@@ -36,7 +36,7 @@ RSpec.describe PostsController, type: :controller do
 
     it "instantiates @post" do
       get :new
-      exepct(assigns(:post)).not_to be_nil
+      expect(assigns(:post)).not_to be_nil
     end
   end
 
