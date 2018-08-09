@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
 
-  let(:my_question) { question.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false ) }
+  let(:my_question) { Question.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false ) }
 
   describe "GET #index" do
     it "returns http success" do
@@ -52,16 +52,16 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe "POST create" do
     it "increases the number of question by 1" do
-      expect{ question :create, params: { question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false } } }.to change(question,:count).by(1)
+      expect{ post :create, params: { question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false } } }.to change(Question, :count).by(1)
     end
 
     it "assigns the new question to @question" do
-      question :create, params: { question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false } }
+      post :create, params: { question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false } }
     end
 
     it "redirects to the new question" do
-      question :create, params: { question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false } }
-      expect(response).to redirect_to question.last
+      post :create, params: { question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: false } }
+      expect(response).to redirect_to Question.last
     end
   end
 
@@ -113,7 +113,7 @@ RSpec.describe QuestionsController, type: :controller do
   describe "DELETE destroy" do
     it "deletes the question" do
       delete :destroy, params: { id: my_question.id }
-      count = question.where({id: my_question.id}).size
+      count = Question.where({id: my_question.id}).size
       expect(count).to eq 0
     end
 
