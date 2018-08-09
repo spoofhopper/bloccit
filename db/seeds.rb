@@ -46,3 +46,21 @@ unique_advertisement = Advertisement.find_or_create_by!(
   copy: "This is the copy of a unique test ad",
   price: "This is the price of a unique test ad"
 )
+
+50.times do
+  Question.create!(
+    title: RandomData.random_sentence,
+    body:  RandomData.random_paragraph,
+    resolved: false
+  )
+end
+questions = Question.all
+
+puts "Seed finished"
+puts "#{Question.count} questions created"
+
+unique_question = Question.find_or_create_by!(
+  title: "This is the title of a unique test question",
+  body: "This is the body of a unique test question",
+  resolved: false
+)
